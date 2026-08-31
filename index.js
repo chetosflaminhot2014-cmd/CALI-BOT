@@ -1,7 +1,24 @@
 require('dotenv').config();
 
+const http = require('http');
 const { Client, GatewayIntentBits } = require('discord.js');
 const { GoogleGenAI } = require('@google/genai');
+
+// ==================================================
+// SERVIDOR HTTP PARA RENDER
+// ==================================================
+
+const PORT = process.env.PORT || 3000;
+
+http.createServer((req, res) => {
+    res.writeHead(200, {
+        'Content-Type': 'text/plain'
+    });
+
+    res.end('Cali Roleplay Bot Online');
+}).listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor HTTP escuchando en el puerto ${PORT}`);
+});
 
 // ==================================================
 // GEMINI
@@ -79,7 +96,7 @@ const ORDEN_STAFF = [
 // BOT ENCENDIDO
 // ==================================================
 
-client.once('ready', function () {
+client.once('clientReady', function () {
 
     console.log('====================================');
     console.log('BOT CALI ROLEPLAY ENCENDIDO');
